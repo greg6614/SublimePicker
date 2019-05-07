@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import com.appeaser.sublimepickerlibrary.common.ButtonHandler;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
@@ -89,6 +90,9 @@ public class SublimePicker extends FrameLayout
     // Time picker
     private SublimeTimePicker mTimePicker;
 
+    //All day switch
+    private Switch allDaySwitch;
+
     // Callback
     private SublimeListenerAdapter mListener;
 
@@ -101,7 +105,7 @@ public class SublimePicker extends FrameLayout
     // Flags set based on client-set options {SublimeOptions}
     private boolean mDatePickerValid = true, mTimePickerValid = true,
             mDatePickerEnabled, mTimePickerEnabled, mRecurrencePickerEnabled,
-            mDatePickerSyncStateCalled;
+            mDatePickerSyncStateCalled, mAllDay;
 
     // Used if listener returns
     // null/invalid(zero-length, empty) string
@@ -227,6 +231,7 @@ public class SublimePicker extends FrameLayout
 
         mDatePicker = (SublimeDatePicker) findViewById(R.id.datePicker);
         mTimePicker = (SublimeTimePicker) findViewById(R.id.timePicker);
+        allDaySwitch = (Switch) findViewById(R.id.switchAllDay);
         mSublimeRecurrencePicker = (SublimeRecurrencePicker)
                 findViewById(R.id.repeat_option_picker);
     }
@@ -547,6 +552,9 @@ public class SublimePicker extends FrameLayout
         mDatePickerEnabled = mOptions.isDatePickerActive();
         mTimePickerEnabled = mOptions.isTimePickerActive();
         mRecurrencePickerEnabled = mOptions.isRecurrencePickerActive();
+        mAllDay = mOptions.isAllDay();
+
+        allDaySwitch.setChecked(mAllDay);
 
         if (mDatePickerEnabled) {
             //int[] dateParams = mOptions.getDateParams();
@@ -597,6 +605,8 @@ public class SublimePicker extends FrameLayout
             mButtonLayout.applyOptions(false /* hide switch button */,
                     mButtonLayoutCallback);
         }
+
+
 
         if (!mDatePickerEnabled && !mTimePickerEnabled) {
             removeView(llMainContentHolder);

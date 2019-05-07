@@ -50,6 +50,8 @@ public class SublimeOptions implements Parcelable {
     private int mStartYear = -1, mStartMonth = -1, mStartDayOfMonth = -1,
                 mEndYear = -1, mEndMonth = -1, mEndDayOfMonth = -1,
                 mHourOfDay = -1, mMinute = -1;
+    private boolean isAllDay;
+
     //private int mYear = -1, mMonthOfYear = -1, mDayOfMonth = -1, mHourOfDay = -1, mMinute = -1;
     private long mMinDate = Long.MIN_VALUE, mMaxDate = Long.MIN_VALUE;
     private boolean mAnimateLayoutChanges, mIs24HourView;
@@ -172,6 +174,11 @@ public class SublimeOptions implements Parcelable {
                 selectedDate.getEndDate().get(Calendar.DAY_OF_MONTH));
     }
 
+    public SublimeOptions setAllDay(boolean allday){
+        isAllDay = allday;
+        return this;
+    }
+
     // Set date range
     // Pass '-1L' for 'minDate'/'maxDate' for default
     @SuppressWarnings("unused")
@@ -216,6 +223,10 @@ public class SublimeOptions implements Parcelable {
     public String getRecurrenceRule() {
         return mRecurrenceRule == null ?
                 "" : mRecurrenceRule;
+    }
+
+    public boolean isAllDay(){
+        return isAllDay;
     }
 
     @SuppressWarnings("unused")
