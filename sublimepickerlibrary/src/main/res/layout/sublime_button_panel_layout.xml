@@ -22,6 +22,16 @@
         android:visibility="gone"
         android:layout_weight="0" />
 
+    <Switch
+        android:id="@+id/switchAllDay"
+        style="?attr/spButtonModeSwitcherButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="All day"
+        android:switchPadding="10dp"
+        android:layout_weight="0" />
+
     <include layout="@layout/decision_button_layout"/>
 
 </merge>
