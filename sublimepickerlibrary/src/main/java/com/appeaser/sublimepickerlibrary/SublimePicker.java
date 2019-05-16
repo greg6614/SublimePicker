@@ -166,7 +166,7 @@ public class SublimePicker extends FrameLayout
                     // TimePicker
                     hour, minute,
                     // RecurrencePicker
-                    recurrenceOption, recurrenceRule);
+                    recurrenceOption, recurrenceRule, mAllDay);
         }
 
         @Override
@@ -181,6 +181,11 @@ public class SublimePicker extends FrameLayout
                     : SublimeOptions.Picker.DATE_PICKER;
 
             updateDisplay();
+        }
+
+        @Override
+        public void onSwitchAllDay(boolean allDay) {
+            mAllDay = allDay;
         }
     };
 
@@ -599,10 +604,13 @@ public class SublimePicker extends FrameLayout
         }
 
         if (mDatePickerEnabled && mTimePickerEnabled) {
-            mButtonLayout.applyOptions(true /* show switch button */,
+            mButtonLayout.applyOptions(true, false /* show switch button */,
+                    mButtonLayoutCallback);
+        } else if (mTimePickerEnabled){
+            mButtonLayout.applyOptions(false,false /* hide switch button */,
                     mButtonLayoutCallback);
         } else {
-            mButtonLayout.applyOptions(false /* hide switch button */,
+            mButtonLayout.applyOptions(false,true /* hide switch button */,
                     mButtonLayoutCallback);
         }
 

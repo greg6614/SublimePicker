@@ -40,7 +40,7 @@ public abstract class SublimeListenerAdapter {
                                                  SelectedDate selectedDate,
                                                  int hourOfDay, int minute,
                                                  SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
-                                                 String recurrenceRule);
+                                                 String recurrenceRule, boolean allDay);
 
     // Cancel button or icon clicked
     public abstract void onCancelled();

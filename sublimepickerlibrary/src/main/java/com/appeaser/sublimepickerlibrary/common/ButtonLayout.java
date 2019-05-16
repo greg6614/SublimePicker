@@ -30,13 +30,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import com.appeaser.sublimepickerlibrary.R;
 import com.appeaser.sublimepickerlibrary.utilities.SUtils;
 
-public class ButtonLayout extends LinearLayout implements View.OnClickListener {
+public class ButtonLayout extends LinearLayout implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     // Can be 'android.widget.Button' or 'android.widget.ImageView'
     View mPositiveButton, mNegativeButton;
 
@@ -44,6 +46,9 @@ public class ButtonLayout extends LinearLayout implements View.OnClickListener {
     // and 'SublimeTimePicker'. Also displays the currently
     // selected date/time depending on the visible picker
     Button mSwitcherButton;
+
+    Switch mSwitchAllDay;
+
     int mIconOverlayColor /* color used with the applied 'ColorFilter' */,
             mDisabledAlpha /* android.R.attr.disabledAlpha * 255 */,
             mButtonBarBgColor;
@@ -96,6 +101,7 @@ public class ButtonLayout extends LinearLayout implements View.OnClickListener {
         inflater.inflate(R.layout.sublime_button_panel_layout, this, true);
 
         mSwitcherButton = (Button) findViewById(R.id.buttonSwitcher);
+        mSwitchAllDay  =(Switch) findViewById(R.id.switchAllDay);
 
         Button bPositive = (Button) findViewById(R.id.buttonPositive);
         Button bNegative = (Button) findViewById(R.id.buttonNegative);
@@ -173,6 +179,7 @@ public class ButtonLayout extends LinearLayout implements View.OnClickListener {
         mPositiveButton.setOnClickListener(this);
         mNegativeButton.setOnClickListener(this);
         mSwitcherButton.setOnClickListener(this);
+        mSwitchAllDay.setOnCheckedChangeListener(this);
     }
 
     /**
@@ -182,8 +189,9 @@ public class ButtonLayout extends LinearLayout implements View.OnClickListener {
      *                         to be shown.
      * @param callback         Callback to 'SublimePicker'
      */
-    public void applyOptions(boolean switcherRequired, @NonNull ButtonHandler.Callback callback) {
+    public void applyOptions(boolean switcherRequired, boolean allDay, @NonNull ButtonHandler.Callback callback) {
         mSwitcherButton.setVisibility(switcherRequired ? View.VISIBLE : View.GONE);
+        mSwitchAllDay.setVisibility(allDay ? VISIBLE : GONE);
         mCallback = callback;
     }
 
@@ -225,5 +233,10 @@ public class ButtonLayout extends LinearLayout implements View.OnClickListener {
         } else if (v == mSwitcherButton) {
             mCallback.onSwitch();
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        mCallback.onSwitchAllDay(b);
     }
 }

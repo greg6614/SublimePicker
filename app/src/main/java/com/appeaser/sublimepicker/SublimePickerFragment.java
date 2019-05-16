@@ -61,10 +61,10 @@ public class SublimePickerFragment extends DialogFragment {
                                             SelectedDate selectedDate,
                                             int hourOfDay, int minute,
                                             SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
-                                            String recurrenceRule) {
+                                            String recurrenceRule, boolean allDay) {
             if (mCallback != null) {
                 mCallback.onDateTimeRecurrenceSet(selectedDate,
-                        hourOfDay, minute, recurrenceOption, recurrenceRule);
+                        hourOfDay, minute, recurrenceOption, recurrenceRule, allDay);
             }
 
             // Should actually be called by activity inside `Callback.onCancelled()`
@@ -123,6 +123,6 @@ public class SublimePickerFragment extends DialogFragment {
         void onDateTimeRecurrenceSet(SelectedDate selectedDate,
                                      int hourOfDay, int minute,
                                      SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
-                                     String recurrenceRule);
+                                     String recurrenceRule, boolean allDay);
     }
 }

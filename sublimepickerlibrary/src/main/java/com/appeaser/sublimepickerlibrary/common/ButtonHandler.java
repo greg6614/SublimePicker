@@ -204,7 +204,7 @@ public class ButtonHandler implements View.OnClickListener {
      *                         to be shown.
      * @param callback         Callback to 'SublimePicker'
      */
-    public void applyOptions(boolean switcherRequired, @NonNull Callback callback) {
+    public void applyOptions(boolean switcherRequired, boolean allDay, @NonNull Callback callback) {
         mCallback = callback;
 
         if (mIsInLandscapeMode) {
@@ -212,7 +212,7 @@ public class ButtonHandler implements View.OnClickListener {
             mSwitcherButtonTP.setVisibility(switcherRequired ? View.VISIBLE : View.GONE);
         } else {
             // Let ButtonLayout handle callbacks
-            mPortraitButtonHandler.applyOptions(switcherRequired, callback);
+            mPortraitButtonHandler.applyOptions(switcherRequired, allDay, callback);
         }
     }
 
@@ -277,5 +277,6 @@ public class ButtonHandler implements View.OnClickListener {
         void onOkay();
         void onCancel();
         void onSwitch();
+        void onSwitchAllDay(boolean b);
     }
 }

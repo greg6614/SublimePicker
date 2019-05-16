@@ -82,7 +82,7 @@ public class Sampler extends AppCompatActivity {
         public void onDateTimeRecurrenceSet(SelectedDate selectedDate,
                                             int hourOfDay, int minute,
                                             SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
-                                            String recurrenceRule) {
+                                            String recurrenceRule, boolean allDay) {
 
             mSelectedDate = selectedDate;
             mHour = hourOfDay;
