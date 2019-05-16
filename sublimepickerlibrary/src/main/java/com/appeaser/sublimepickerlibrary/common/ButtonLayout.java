@@ -237,6 +237,8 @@ public class ButtonLayout extends LinearLayout implements View.OnClickListener, 
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        mCallback.onSwitchAllDay(b);
+        if (mCallback != null){
+            mCallback.onSwitchAllDay(b);
+        }
     }
 }
